@@ -40,21 +40,26 @@ f = open(wordListFile, "r")
 for line in f.readlines():
 	wordlist.append(line)
 
-check = input("Letters: ").lower()
-allCorrect = []
-count = 0
-for word in wordlist:
-	if check in word:
-		allCorrect.append(word)
-		count += 1
-		if count > totalWords:
-			break
+while True:
+	check = input("Letters: ").lower()
+	if len(check) == 0:
+		os.system('clear')
+		print("Exiting")
+		os._exit(1)
+	allCorrect = []
+	count = 0
+	for word in wordlist:
+		if check in word:
+			allCorrect.append(word)
+			count += 1
+			if count > totalWords:
+				break
 
-# Sort by Length
-sortedWords = sorted(allCorrect, key=len, reverse=False)
+	# Sort Correct Words by Length
+	sortedWords = sorted(allCorrect, key=len, reverse=True)
 
-# Print Matching Words
-os.system('clear')
-for word in sortedWords:
-	print("Letters: " + str(len(word) - 1))
-	print(word)
+	# Print Matching Words
+	os.system('clear')
+	for word in sortedWords:
+		print("Letters: " + str(len(word) - 1))
+		print(word)
